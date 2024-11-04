@@ -2,10 +2,11 @@
 
 namespace App\Model;
 
-abstract class Promo
+use App\Model\Promo\PromoInterface;
+
+abstract class Promo implements PromoInterface
 {
-    public function getName(): string
-    {
-        return self::class;
-    }
+    abstract function isAvailable(array $products): bool;
+
+    abstract function getPrice(array $products): float;
 }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App;
 
@@ -52,19 +52,19 @@ class SalesTest extends TestCase
     {
         $offer = $this->createExampleOffer();
         $saleService = new SaleService(
-            new PromoResolver()
+            promoResolver: new PromoResolver()
         );
 
-        $checkoutPrice = $saleService->getCheckoutPrice($offer);
+        $checkoutPrice = $saleService->getCheckoutPrice(offer: $offer);
 
-        $this->assertLessThan($saleService->getProductsPrice($offer), $checkoutPrice);
+        $this->assertLessThan($saleService->getProductsPrice(offer: $offer), $checkoutPrice);
         $this->assertEquals($checkoutPrice, 66);
     }
 
     public function testPromoChoice(): void
     {
         $promoResolover = new PromoResolver();
-        $promo = $promoResolover->pickPromo($this->createExampleOffer());
+        $promo = $promoResolover->pickPromo(offer: $this->createExampleOffer());
 
         $this->assertInstanceOf(PromoEveryOverLimitFree::class, $promo);
     }
@@ -74,19 +74,19 @@ class SalesTest extends TestCase
     {
         $offer = $this->createExampleSmallOffer();
         $saleService = new SaleService(
-            new PromoResolver()
+            promoResolver: new PromoResolver()
         );
 
-        $checkoutPrice = $saleService->getCheckoutPrice($offer);
+        $checkoutPrice = $saleService->getCheckoutPrice(offer: $offer);
 
-        $this->assertLessThan($saleService->getProductsPrice($offer), $checkoutPrice);
+        $this->assertLessThan($saleService->getProductsPrice(offer: $offer), $checkoutPrice);
         $this->assertEquals($checkoutPrice, 261);
     }
 
     public function testPromoChoiceForSmallOffer(): void
     {
         $promoResolover = new PromoResolver();
-        $promo = $promoResolover->pickPromo($this->createExampleSmallOffer());
+        $promo = $promoResolover->pickPromo(offer: $this->createExampleSmallOffer());
 
         $this->assertInstanceOf(PromoPriceOverLimit::class, $promo);
     }
@@ -99,13 +99,13 @@ class SalesTest extends TestCase
         ;
 
         $promoResolver = new PromoResolver();
-        $saleService = new SaleService($promoResolver);
+        $saleService = new SaleService(promoResolver: $promoResolver);
 
-        $checkoutPrice = $saleService->getCheckoutPrice($miniOffer);
+        $checkoutPrice = $saleService->getCheckoutPrice(offer: $miniOffer);
 
-        $this->assertEquals($saleService->getProductsPrice($miniOffer), $checkoutPrice);
+        $this->assertEquals($saleService->getProductsPrice(offer: $miniOffer), $checkoutPrice);
         $this->assertEquals($checkoutPrice, 70);
-        $this->assertNull($promoResolver->pickPromo($miniOffer));
+        $this->assertNull($promoResolver->pickPromo(offer: $miniOffer));
     }
 
     //Both promos work, but 10% discount is cheaper
@@ -114,6 +114,6 @@ class SalesTest extends TestCase
         $expensiveOffer = $this->createExampleOffer()
             ->addProduct(new Product('Dainese Axial 2 Air', ProductType::BOOTS, 2770.4));
 
-        $this->assertInstanceOf(PromoPriceOverLimit::class, (new PromoResolver())->pickPromo($expensiveOffer));
+        $this->assertInstanceOf(PromoPriceOverLimit::class, (new PromoResolver())->pickPromo(offer: $expensiveOffer));
     }
 }

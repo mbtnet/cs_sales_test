@@ -8,8 +8,7 @@ class SaleService
 {
     public function __construct(
         private PromoResolverInterface $promoResolver,
-    )
-    {
+    ) {
     }
 
     public function getProductsPrice(Offer $offer): float

@@ -3,19 +3,19 @@
 namespace App\Model\Promo;
 
 use App\Model\Promo;
+use App\Model\Product;
 
-class PromoEveryOverLimitFree extends Promo implements PromoInterface
+class PromoEveryOverLimitFree extends Promo
 {
     const PRODUCTS_LIMIT = 5;
 
     public function __construct(
         private int $productsLimit = self::PRODUCTS_LIMIT,
-    )
-    {
+    ) {
     }
 
     /**
-     * @param Products[] $products
+     * @param Product[] $products
      */
     public function isAvailable(array $products): bool
     {
@@ -23,7 +23,7 @@ class PromoEveryOverLimitFree extends Promo implements PromoInterface
     }
 
     /**
-     * @param Products[] $products
+     * @param Product[] $products
      */
     public function getPrice(array $products): float
     {
@@ -36,12 +36,12 @@ class PromoEveryOverLimitFree extends Promo implements PromoInterface
 
         foreach ($products as $product) {
             $type = $product->getType()->value;
-            $typesCounters[$type] =  
-                isset($typesCounters[$type]) ? 
-                ++$typesCounters[$type] : 
+            $typesCounters[$type] =
+                isset($typesCounters[$type]) ?
+                ++$typesCounters[$type] :
                 1;
 
-            if($limit === $typesCounters[$type]) {
+            if ($limit === $typesCounters[$type]) {
                 $typesCounters[$type] = 0;
             } else {
                 $sumPrice += $product->getPrice();

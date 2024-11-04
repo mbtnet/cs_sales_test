@@ -10,13 +10,12 @@ class Product
         private string $name,
         private ProductType $type,
         private float $price,
-    )
-    {
+    ) {
     }
 
     /**
      * Get the value of name
-     */ 
+     */
     public function getName(): string
     {
         return $this->name;
@@ -25,7 +24,7 @@ class Product
     /**
      * Set the value of name
      *
-     */ 
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -35,7 +34,7 @@ class Product
 
     /**
      * Get the value of type
-     */ 
+     */
     public function getType(): ProductType
     {
         return $this->type;
@@ -44,7 +43,7 @@ class Product
     /**
      * Set the value of type
      *
-     */ 
+     */
     public function setType(ProductType $type): self
     {
         $this->type = $type;
@@ -54,7 +53,7 @@ class Product
 
     /**
      * Get the value of price
-     */ 
+     */
     public function getPrice(): float
     {
         return $this->price;
@@ -63,7 +62,7 @@ class Product
     /**
      * Set the value of price
      *
-     */ 
+     */
     public function setPrice(float $price): self
     {
         $this->price = $price;

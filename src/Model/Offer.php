@@ -13,13 +13,12 @@ class Offer
          * @param Product[] $products
          */
         private array $products = [],
-        
+
         /**
          * @param Promo[] $promos
          */
         private array $promos = [],
-    )
-    {
+    ) {
     }
 
     /**
