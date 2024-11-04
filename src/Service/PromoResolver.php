@@ -18,7 +18,7 @@ class PromoResolver implements PromoResolverInterface
         $bestPromo = null;
 
         foreach ($offer->getPromos() as $promo) {
-            if ($promo->isAvalable($products) && $maxPrice > $promo->getPrice($products)) {
+            if ($promo->isAvailable($products) && $maxPrice > $promo->getPrice($products)) {
                 $bestPromo = $promo;
             }
         }

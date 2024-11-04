@@ -12,12 +12,12 @@ class Offer
         /**
          * @param Product[] $products
          */
-        private array $products,
+        private array $products = [],
         
         /**
          * @param Promo[] $promos
          */
-        private array $promos,
+        private array $promos = [],
     )
     {
     }
@@ -40,6 +40,20 @@ class Offer
 
     public function getPrice(): float
     {
-        PriceHelper::getSum($this->getProducts());
+        return PriceHelper::getSum($this->getProducts());
+    }
+
+    public function addProduct(Product $product): self
+    {
+        $this->products[] = $product;
+
+        return $this;
+    }
+
+    public function addPromo(Promo $promo): self
+    {
+        $this->promos[] = $promo;
+
+        return $this;
     }
 }

@@ -25,6 +25,6 @@ class SaleService
             return $offer->getPrice();
         }
 
-        return $promo->getFullPrice($offer->getProducts());
+        return $promo->getPrice($offer->getProducts());
     }
 }

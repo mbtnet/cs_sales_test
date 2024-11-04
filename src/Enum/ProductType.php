@@ -2,9 +2,9 @@
 
 namespace App\Enum;
 
-enum ProductType
+enum ProductType: string
 {
-    case GLOVE;
-    case HELMET;
-    case BOOTS;
+    case GLOVES = 'gloves';
+    case HELMET = 'helmet';
+    case BOOTS = 'boots';
 }

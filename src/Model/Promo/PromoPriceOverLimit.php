@@ -3,8 +3,9 @@
 namespace App\Model\Promo;
 
 use App\Helper\PriceHelper;
+use App\Model\Promo;
 
-class PromoPriceOverLimit implements PromoInterface
+class PromoPriceOverLimit extends Promo implements PromoInterface
 {
     const PRICE_LIMIT = 100.0;
     const PRICE_REDUCTION_PERCENT = 10;
@@ -21,7 +22,7 @@ class PromoPriceOverLimit implements PromoInterface
      */
     public function isAvailable(array $products): bool
     {
-        return PriceHelper::getPrice($products) > $this->maxPrice;
+        return PriceHelper::getSum($products) > $this->maxPrice;
     }
 
     /**
@@ -29,7 +30,7 @@ class PromoPriceOverLimit implements PromoInterface
      */
     public function getPrice(array $products): float
     {
-        $sum = PriceHelper::getPrice($products);
+        $sum = PriceHelper::getSum($products);
         
         return $sum - ($sum * ($this->priceReductionPercent / 100));
     }

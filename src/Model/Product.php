@@ -17,7 +17,7 @@ class Product
     /**
      * Get the value of name
      */ 
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -25,9 +25,8 @@ class Product
     /**
      * Set the value of name
      *
-     * @return  self
      */ 
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -37,7 +36,7 @@ class Product
     /**
      * Get the value of type
      */ 
-    public function getType()
+    public function getType(): ProductType
     {
         return $this->type;
     }
@@ -45,9 +44,8 @@ class Product
     /**
      * Set the value of type
      *
-     * @return  self
      */ 
-    public function setType($type)
+    public function setType(ProductType $type): self
     {
         $this->type = $type;
 
@@ -57,7 +55,7 @@ class Product
     /**
      * Get the value of price
      */ 
-    public function getPrice()
+    public function getPrice(): float
     {
         return $this->price;
     }
@@ -65,9 +63,8 @@ class Product
     /**
      * Set the value of price
      *
-     * @return  self
      */ 
-    public function setPrice($price)
+    public function setPrice(float $price): self
     {
         $this->price = $price;
 

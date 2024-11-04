@@ -2,16 +2,24 @@
 
 namespace App\Model\Promo;
 
-class PromoEveryOverLimitFree implements PromoInterface
+use App\Model\Promo;
+
+class PromoEveryOverLimitFree extends Promo implements PromoInterface
 {
-    const PRODUCTS_LIMIT = 4;
+    const PRODUCTS_LIMIT = 5;
+
+    public function __construct(
+        private int $productsLimit = self::PRODUCTS_LIMIT,
+    )
+    {
+    }
 
     /**
      * @param Products[] $products
      */
     public function isAvailable(array $products): bool
     {
-        return count($products) > self::PRODUCTS_LIMIT;
+        return $this->productsLimit <= count($products);
     }
 
     /**
@@ -19,15 +27,24 @@ class PromoEveryOverLimitFree implements PromoInterface
      */
     public function getPrice(array $products): float
     {
-        // The question is: which products supposed to be "free"? Just every "fifth" one, or all of the cheapest with the given type?
+        //TODO The question is: which products supposed to be "free"? Just every "fifth" one, or all of the cheapest with the given type over limit?
 
-        $limit = self::PRODUCTS_LIMIT;
-        $types = [];
+        $limit = $this->productsLimit;
+        $typesCounters = [];
         $sumPrice = 0.0;
 
         foreach ($products as $product) {
-            //TODO !!!!!!!!!
-            ++$type[$product->getType()];
+            $type = $product->getType()->value;
+            $typesCounters[$type] =  
+                isset($typesCounters[$type]) ? 
+                ++$typesCounters[$type] : 
+                1;
+
+            if($limit === $typesCounters[$type]) {
+                $typesCounters[$type] = 0;
+            } else {
+                $sumPrice += $product->getPrice();
+            }
         }
 
         return $sumPrice;
