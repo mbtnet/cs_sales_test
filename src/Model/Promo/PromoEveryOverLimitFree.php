@@ -27,7 +27,8 @@ class PromoEveryOverLimitFree extends Promo implements PromoInterface
      */
     public function getPrice(array $products): float
     {
-        //TODO The question is: which products supposed to be "free"? Just every "fifth" one, or all of the cheapest with the given type over limit?
+        //TODO The question is: which products supposed to be "free"? 
+        //Just every "fifth" one, or all of the cheapest with the given type over limit?
 
         $limit = $this->productsLimit;
         $typesCounters = [];

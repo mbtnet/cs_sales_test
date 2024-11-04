@@ -107,4 +107,13 @@ class SalesTest extends TestCase
         $this->assertEquals($checkoutPrice, 70);
         $this->assertNull($promoResolver->pickPromo($miniOffer));
     }
+
+    //Both promos work, but 10% discount is cheaper
+    public function testCheaperPromoPicker(): void
+    {
+        $expensiveOffer = $this->createExampleOffer()
+            ->addProduct(new Product('Dainese Axial 2 Air', ProductType::BOOTS, 2770.4));
+
+        $this->assertInstanceOf(PromoPriceOverLimit::class, (new PromoResolver())->pickPromo($expensiveOffer));
+    }
 }
